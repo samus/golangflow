@@ -1,12 +1,18 @@
 {
   "name": "golangflow",
   "scripts": {
-    "postdeploy": "./bin/app migrate"
+    "postdeploy": "./bin/app migrate",
+    "postdeploy": "./bin/app task db:seed"
   },
   "env": {
     "GO_ENV": "test"
   },
-  "formation": {},
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
   "addons": ["heroku-postgresql:hobby-dev"],
   "buildpacks": []
 }
