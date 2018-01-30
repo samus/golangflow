@@ -35,3 +35,23 @@ We recommend you heading over to [http://gobuffalo.io](http://gobuffalo.io) and 
 Good luck!
 
 [Powered by Buffalo](http://gobuffalo.io)
+
+
+GoLangFlow Setup Instructions (WIP)
+
+buffalo setup
+
+
+
+
+
+Environment variables:
+
+NEW_RELIC_LICENSE_KEY
+ADMIN_USER
+ADMIN_PASS
+GITHUB_KEY
+GITHUB_SECRET
+
+Authentication:
+#Tip: If testing on a local machine access the site through http://127.0.0.1
