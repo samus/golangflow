@@ -2,10 +2,11 @@ package actions
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/bscott/golangflow/models"
 	"github.com/gobuffalo/buffalo"
+	"github.com/gobuffalo/envy"
+	"github.com/labstack/gommon/log"
 	"github.com/markbates/goth"
 	"github.com/markbates/goth/gothic"
 	"github.com/markbates/goth/providers/github"
@@ -16,9 +17,17 @@ import (
 
 func init() {
 	gothic.Store = App().SessionStore
-
+	ghKey, err := envy.MustGet("GITHUB_KEY")
+	if err != nil {
+		log.Info("No github key set.  To enable logins set a GITHUB_KEY environment variable.")
+		log.Info("See https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/ for details on how to obtain a key")
+	}
+	ghSecret, err := envy.MustGet("GITHUB_SECRET")
+	if err != nil {
+		log.Info("No github secret set.  To enable logins set a GITHUB_SECRET environment variable.")
+	}
 	goth.UseProviders(
-		github.New(os.Getenv("GITHUB_KEY"), os.Getenv("GITHUB_SECRET"), fmt.Sprintf("%s%s", App().Host, "/auth/github/callback")),
+		github.New(ghKey, ghSecret, fmt.Sprintf("%s%s", App().Host, "/auth/github/callback")),
 	)
 }
 
