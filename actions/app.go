@@ -35,6 +35,7 @@ func App() *buffalo.App {
 		app = buffalo.New(buffalo.Options{
 			Env:         ENV,
 			SessionName: "_golangflow_session",
+			SessionName: "flow_session",
 		})
 		if ENV == "development" {
 			app.Use(middleware.ParameterLogger)
